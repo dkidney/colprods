@@ -8,7 +8,7 @@ using namespace Rcpp;
 //' @title Calculate column products of a matrix
 //' @description Various functions to calculate the column products of a matrix, each with
 //'   a different implementation.
-//' @param x a matrix
+//' @param x a numeric matrix
 //' @example inst/examples/example-colprods.r
 //' @export
 // [[Rcpp::export]]

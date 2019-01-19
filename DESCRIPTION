@@ -1,5 +1,5 @@
 Package: colprods
-Title: calculate column products of numeric matrices
+Title: Calculate column products of numeric matrices
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Darren",

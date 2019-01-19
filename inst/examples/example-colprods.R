@@ -17,6 +17,7 @@ as.numeric(colprods_arma(x))
 
 library(microbenchmark)
 
+# tall
 nr = 1000
 nc = 100
 x = matrix(rnorm(nr * nc), nr, nc)
@@ -30,6 +31,7 @@ microbenchmark(
     as.numeric(colprods_arma(x))
 )
 
+# wide
 nr = 100
 nc = 1000
 x = matrix(rnorm(nr * nc), nr, nc)

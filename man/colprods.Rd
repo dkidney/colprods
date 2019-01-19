@@ -5,9 +5,9 @@
 \alias{colprods_rcpp}
 \alias{colprods_rcpp_colwise}
 \alias{colprods_rcpp_rowwise}
-\alias{colprods_for_loop}
 \alias{colprods_apply}
 \alias{colprods_sapply}
+\alias{colprods_for_loop}
 \title{Calculate column products of a matrix}
 \usage{
 colprods_arma(x)
@@ -16,14 +16,14 @@ colprods_rcpp(x)
 
 colprods_rcpp_rowwise(x)
 
-colprods_for_loop(x)
-
 colprods_apply(x)
 
 colprods_sapply(x)
+
+colprods_for_loop(x)
 }
 \arguments{
-\item{x}{a matrix}
+\item{x}{a numeric matrix}
 }
 \description{
 Various functions to calculate the column products of a matrix, each with
@@ -49,6 +49,7 @@ as.numeric(colprods_arma(x))
 
 library(microbenchmark)
 
+# tall
 nr = 1000
 nc = 100
 x = matrix(rnorm(nr * nc), nr, nc)
@@ -62,6 +63,7 @@ microbenchmark(
     as.numeric(colprods_arma(x))
 )
 
+# wide
 nr = 100
 nc = 1000
 x = matrix(rnorm(nr * nc), nr, nc)
