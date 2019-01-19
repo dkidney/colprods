@@ -1,0 +1,43 @@
+---
+date: '`r format(Sys.Date(), "%d %b %Y")`'
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# colprods
+
+The goal of colprods is to provide a simple example of how to incorporate Rcpp and RcppArmadillo functions into a package. It does this using various implementations of a function to calculate the column products of a numeric matrix.
+
+## Installation
+
+You can install the released version of colprods from [Github](https://www.github.com/dkidney/colprods) with:
+
+``` r
+devtools::install_github("dkidney/colprods")
+```
+
+## Example
+
+```{r example}
+library(colprods)
+x = matrix(1:9, 3)
+colprods_for_loop(x)
+colprods_sapply(x)
+colprods_apply(x)
+colprods_rcpp(x)
+colprods_rcpp_rowwise(x)
+colprods_arma(x)
+as.numeric(colprods_arma(x))
+```
+
+
