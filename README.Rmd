@@ -1,16 +1,20 @@
 ---
 date: '`r format(Sys.Date(), "%d %b %Y")`'
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+    collapse = TRUE,
+    comment = "#>",
+    fig.path = "man/figures/README-",
+    fig.height = 10 * 2 / (1 + sqrt(5)),
+    fig.width = 10,
+    out.width = "100%"
 )
 ```
 
@@ -22,15 +26,22 @@ The goal of colprods is to provide a simple example of how to incorporate Rcpp a
 
 You can install the released version of colprods from [Github](https://www.github.com/dkidney/colprods) with:
 
-``` r
+```{r, eval=FALSE}
 devtools::install_github("dkidney/colprods")
 ```
 
-## Example
+## Simple example
 
-```{r example}
-library(colprods)
+```{r}
 x = matrix(1:9, 3)
+x
+```
+
+```{r}
+library(colprods)
+```
+
+```{r, results='hold'}
 colprods_for_loop(x)
 colprods_sapply(x)
 colprods_apply(x)
@@ -38,6 +49,58 @@ colprods_rcpp(x)
 colprods_rcpp_rowwise(x)
 colprods_arma(x)
 as.numeric(colprods_arma(x))
+```
+
+Notice that `colprods_arma` returns a matrix - this is because I haven't worked out how to coerce a single-row matrix into a vector within the RcppArmadillo code.
+
+## Benchmarking
+
+```{r, message=FALSE}
+library(dplyr)
+library(microbenchmark)
+bench = function(x){
+    microbenchmark(
+        "for_loop" = colprods_for_loop(x),
+        "sapply"   = colprods_sapply(x),
+        "apply"    = colprods_apply(x),
+        "rcpp"     = colprods_rcpp(x),
+        "rcpp2"    = colprods_rcpp_rowwise(x),
+        "arma"     = colprods_arma(x),
+        "arma2"    = as.numeric(colprods_arma(x))
+    )
+}
+print_bench = function(x){
+    x %>% 
+        summary %>% 
+        mutate(mean_rel = mean / min(mean)) %>% 
+        mutate(median_rel = median / min(median)) %>% 
+        select(expr, mean, median, mean_rel, median_rel, neval) %>% 
+        mutate_at(vars(mean, median), round) %>% 
+        mutate_at(vars(ends_with("_rel")), funs(round(., 1))) %>% 
+        print.data.frame(row.names = FALSE)
+}
+```
+
+### Tall matrix
+
+```{r}
+nr = 1000
+nc = 100
+x = matrix(rnorm(nr * nc), nr, nc)
+bench_tall = x %>% bench
+bench_tall %>% print_bench
+bench_tall %>% boxplot(log = TRUE)
+```
+
+### Wide matrix
+
+```{r}
+nr = 100
+nc = 1000
+x = matrix(rnorm(nr * nc), nr, nc)
+bench_wide = x %>% bench
+bench_wide %>% print_bench
+bench_wide %>% boxplot(log = TRUE)
 ```
 
 
