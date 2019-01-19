@@ -2,6 +2,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+![](https://travis-ci.org/dkidney/colprods.svg?branch=develop)
+
 # colprods
 
 The goal of colprods is to provide a simple example of how to
@@ -93,13 +95,13 @@ x = matrix(rnorm(nr * nc), nr, nc)
 bench_tall = x %>% bench
 bench_tall %>% print_bench
 #>      expr mean median mean_rel median_rel neval
-#>  for_loop  981    515     18.5       10.6   100
-#>    sapply 1034    600     19.5       12.4   100
-#>     apply 1430   1126     27.0       23.3   100
-#>      rcpp  538    519     10.1       10.7   100
-#>     rcpp2  585    550     11.0       11.4   100
-#>      arma   53     48      1.0        1.0   100
-#>     arma2   61     50      1.2        1.0   100
+#>  for_loop 1018    542     17.1       11.1   100
+#>    sapply  964    600     16.2       12.3   100
+#>     apply 1488   1135     25.0       23.2   100
+#>      rcpp  529    524      8.9       10.7   100
+#>     rcpp2  623    557     10.5       11.4   100
+#>      arma   60     49      1.0        1.0   100
+#>     arma2   60     49      1.0        1.0   100
 bench_tall %>% boxplot(log = TRUE)
 ```
 
@@ -114,13 +116,13 @@ x = matrix(rnorm(nr * nc), nr, nc)
 bench_wide = x %>% bench
 bench_wide %>% print_bench
 #>      expr mean median mean_rel median_rel neval
-#>  for_loop 2412   1790     36.1       34.1   100
-#>    sapply 2711   2423     40.6       46.1   100
-#>     apply 3390   2763     50.7       52.6   100
-#>      rcpp  553    533      8.3       10.1   100
-#>     rcpp2  631    562      9.4       10.7   100
-#>      arma   75     53      1.1        1.0   100
-#>     arma2   67     53      1.0        1.0   100
+#>  for_loop 2014   1790     31.0       34.9   100
+#>    sapply 3089   2383     47.6       46.4   100
+#>     apply 3543   2804     54.6       54.6   100
+#>      rcpp  567    532      8.7       10.4   100
+#>     rcpp2  642    568      9.9       11.1   100
+#>      arma   67     51      1.0        1.0   100
+#>     arma2   65     56      1.0        1.1   100
 bench_wide %>% boxplot(log = TRUE)
 ```
 

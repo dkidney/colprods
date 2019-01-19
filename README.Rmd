@@ -7,6 +7,8 @@ editor_options:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+![](https://travis-ci.org/dkidney/colprods.svg?branch=develop)
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE,
