@@ -4,6 +4,9 @@
 
 # colprods
 
+![Travis build
+status](https://travis-ci.org/dkidney/colprods.svg?branch=master)
+
 The goal of colprods is to provide a simple example of how to
 incorporate Rcpp and RcppArmadillo functions into a package. It does
 this using various implementations of a function to calculate the column
@@ -93,13 +96,13 @@ x = matrix(rnorm(nr * nc), nr, nc)
 bench_tall = x %>% bench
 bench_tall %>% print_bench
 #>      expr mean median mean_rel median_rel neval
-#>  for_loop  981    515     18.5       10.6   100
-#>    sapply 1034    600     19.5       12.4   100
-#>     apply 1430   1126     27.0       23.3   100
-#>      rcpp  538    519     10.1       10.7   100
-#>     rcpp2  585    550     11.0       11.4   100
-#>      arma   53     48      1.0        1.0   100
-#>     arma2   61     50      1.2        1.0   100
+#>  for_loop  858    525     15.1       10.5   100
+#>    sapply  928    607     16.3       12.2   100
+#>     apply 1626   1142     28.7       22.9   100
+#>      rcpp  540    520      9.5       10.4   100
+#>     rcpp2  597    551     10.5       11.0   100
+#>      arma   59     50      1.0        1.0   100
+#>     arma2   57     51      1.0        1.0   100
 bench_tall %>% boxplot(log = TRUE)
 ```
 
@@ -114,13 +117,13 @@ x = matrix(rnorm(nr * nc), nr, nc)
 bench_wide = x %>% bench
 bench_wide %>% print_bench
 #>      expr mean median mean_rel median_rel neval
-#>  for_loop 2412   1790     36.1       34.1   100
-#>    sapply 2711   2423     40.6       46.1   100
-#>     apply 3390   2763     50.7       52.6   100
-#>      rcpp  553    533      8.3       10.1   100
-#>     rcpp2  631    562      9.4       10.7   100
-#>      arma   75     53      1.1        1.0   100
-#>     arma2   67     53      1.0        1.0   100
+#>  for_loop 1994   1775     28.5       34.0   100
+#>    sapply 2885   2370     41.2       45.3   100
+#>     apply 3405   2754     48.7       52.7   100
+#>      rcpp  578    534      8.3       10.2   100
+#>     rcpp2  626    567      9.0       10.8   100
+#>      arma   73     52      1.0        1.0   100
+#>     arma2   70     56      1.0        1.1   100
 bench_wide %>% boxplot(log = TRUE)
 ```
 

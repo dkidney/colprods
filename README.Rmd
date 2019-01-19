@@ -20,6 +20,8 @@ knitr::opts_chunk$set(
 
 # colprods
 
+![Travis build status](https://travis-ci.org/dkidney/colprods.svg?branch=master)
+
 The goal of colprods is to provide a simple example of how to incorporate Rcpp and RcppArmadillo functions into a package. It does this using various implementations of a function to calculate the column products of a numeric matrix.
 
 ## Installation
